@@ -40,4 +40,4 @@ const Post = sequelize.define(
     }
 );
 
-module.exports = { sequelize };
+module.exports = { Post };

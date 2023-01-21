@@ -42,4 +42,4 @@ const Comment = sequelize.define(
     }
 );
 
-module.exports = { sequelize };
+module.exports = { Comment };
