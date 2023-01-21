@@ -26,7 +26,7 @@ const postComment = async (req, res) => {
     }
 };
 
-const pathComment = async (req, res) => {
+const patchComment = async (req, res) => {
     try {
         const comment = await Comment.findByPk(req.params.id);
         if (comment) {
@@ -52,4 +52,4 @@ const delateComent = async (req, res) => {
     }
 };
 
-module.exports = { getComments, getComment, postComment, pathComment, delateComent };
+module.exports = { getComments, getComment, postComment, patchComment, delateComent };

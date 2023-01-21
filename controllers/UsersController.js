@@ -26,7 +26,7 @@ const postUser = async (req, res) => {
     }
 };
 
-const pathUser = async (req, res) => {
+const patchUser = async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
         if (user) {
@@ -53,4 +53,4 @@ const delateUser = async (req, res) => {
     }
 };
 
-module.exports = { getUsers, getUser, postUser, pathUser, delateUser };
+module.exports = { getUsers, getUser, postUser, patchUser, delateUser };

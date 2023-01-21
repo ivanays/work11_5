@@ -26,7 +26,7 @@ const postPost = async (req, res) => {
     }
 };
 
-const pathPost = async (req, res) => {
+const patchPost = async (req, res) => {
     try {
         const post = await Post.findByPk(req.params.id);
         if (post) {
@@ -53,4 +53,4 @@ const delatePost = async (req, res) => {
     }
 };
 
-module.exports = { getPosts, getPost, postPost, pathPost, delatePost };
+module.exports = { getPosts, getPost, postPost, patchPost, delatePost };

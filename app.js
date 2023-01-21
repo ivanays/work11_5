@@ -4,9 +4,9 @@ const port = 3000;
 
 app.use(express.json());
 
-const { getUsers, getUser, postUser, pathUser, delateUser } = require("./controllers/UsersController");
-const { getPosts, getPost, postPost, pathPost, delatePost } = require('./controllers/PostsController');
-const { getComments, getComment, postComment, pathComment, delateComent } = require('./controllers/CommentsController');
+const { getUsers, getUser, postUser, patchUser, delateUser } = require("./controllers/UsersController");
+const { getPosts, getPost, postPost, patchPost, delatePost } = require('./controllers/PostsController');
+const { getComments, getComment, postComment, patchComment, delateComent } = require('./controllers/CommentsController');
 
 app.get("/users", getUsers);
 app.get("/posts", getPosts);
@@ -20,9 +20,9 @@ app.post("/users/", postUser);
 app.post("/posts/", postPost);
 app.post("/comment/", postComment);
 
-app.path("/users/:id", pathUser);
-app.path("/posts/:id", pathPost);
-app.path("/comments/:id", pathComment);
+app.patch("/users/:id", patchUser);
+app.patch("/posts/:id", patchPost);
+app.patch("/comments/:id", patchComment);
 
 app.delete("/users/:id", delateUser);;
 app.delete("/posts/:id", delatePost);
