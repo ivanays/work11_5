@@ -4,136 +4,29 @@ const port = 3000;
 
 app.use(express.json());
 
-const { User } = require("./models/User");
-const { Post } = require("./models/Post");
-const { Comment } = require("./models/Comment");
+const { getUsers, getUser, postUser, pathUser, delateUser } = require("./controllers/UsersController");
+const { getPosts, getPost, postPost, pathPost, delatePost } = require('./controllers/PostsController');
+const { getComments, getComment, postComment, pathComment, delateComent } = require('./controllers/CommentsController');
 
-app.get("/users", async (req, res) => {
-    const users = await User.findAll({});
-    return res.status(200).json({
-        data: users,
-    })
-});
-app.get("/posts", async (req, res) => {
-    const posts = await Post.findAll({});
-    return res.status(200).json({
-        data: posts,
-    });
-});
-app.get("/comments", async (req, res) => {
-    const comments = await Comment.findAll({});
-    return res.status(200).json({
-        data: comments,
-    });
-});
+app.get("/users", getUsers);
+app.get("/posts", getPosts);
+app.get("/comments", getComments);
 
-app.get("/users/:id", async (req, res) => {
-    const user = await User.findByPk(req.params.id);
-    return res.status(200).json(user);
-});
-app.get("/posts/:id", async (req, res) => {
-    const post = await Post.findByPk(req.params.id);
-    return res.status(200).json(post);
-});
-app.get("/comments/:id", async (req, res) => {
-    const comment = await Comment.findByPk(req.params.id);
-    return res.status(200).json(comment);
-});
+app.get("/users/:id", getUser);
+app.get("/posts/:id", getPost);
+app.get("/comment/:id", getComment);
 
-app.post("/users/", async (req, res) => {
-    try {
-        const user = await User.create(req.body);
-        await user.reload();
-        return res.status(201).json(user);
-    } catch (e) {
-        return res.json(e);
-    }
-});
-app.post("/posts/", async (req, res) => {
-    try {
-        const post = await Post.create(req.body);
-        await post.reload();
-        return res.status(201).json(post);
-    } catch (e) {
-        return res.json(e);
-    }
-});
-app.post("/comments/", async (req, res) => {
-    try {
-        const comment = await Comment.create(req.body);
-        await comment.reload();
-        return res.status(201).json(comment);
-    } catch (e) {
-        return res.json(e);
-    }
-});
+app.post("/users/", postUser);
+app.post("/posts/", postPost);
+app.post("/comment/", postComment);
 
-app.path("/users/:id", async (req, res) => {
-    try {
-        const user = await User.findByPk(req.params.id);
-        if (user) {
-            user.first_name = req.body.first_name;
-            user.last_name = req.body.last_name;
-        }
-        await user.save();
-        return user.res.status(201).json(user);
-    } catch (e) {
-        return res.json(e);
-    }
-});
-app.path("/posts/:id", async (req, res) => {
-    try {
-        const post = await Post.findByPk(req.params.id);
-        if (post) {
-            post.title = req.body.title;
-            post.body = req.body.body;
-        }
-        await post.save();
-        return post.res.status(201).json(post);
-    } catch (e) {
-        return res.json(e);
-    }
-});
-app.path("/comments/:id", async (req, res) => {
-    try {
-        const comment = await Comment.findByPk(req.params.id);
-        if (comment) {
-            comment.body = req.body.body;
-        }
-        await comment.save();
-        return comment.res.status(201).json(comment);
-    } catch (e) {
-        return res.json(e);
-    }
-});
+app.path("/users/:id", pathUser);
+app.path("/posts/:id", pathPost);
+app.path("/comments/:id", pathComment);
 
-app.delete("/users/:id", async (req, res) => {
-    try {
-        const user = await User.findByPk(req.params.id);
-        await user.destroy();
-        return user.res.status(204).json(user);
-    } catch (e) {
-        return res.json(e);
-    }
-});
-app.delete("/posts/:id", async (req, res) => {
-    try {
-        const post = await Post.findByPk(req.params.id);
-        await post.destroy();
-        return post.res.status(204).json(post);
-    } catch (e) {
-        return res.json(e);
-    }
-});
-app.delete("/comments/:id", async (req, res) => {
-    try {
-        const comment = await Comment.findByPk(req.params.id);
-        await comment.destroy();
-        return comment.res.status(204).json(comment);
-    } catch (e) {
-        return res.json(e);
-    }
-});
+app.delete("/users/:id", delateUser);;
+app.delete("/posts/:id", delatePost);
+app.delete("/comments/:id", delateComent);
 
 
 app.listen(port, async () => {
