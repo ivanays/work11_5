@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Comment } = require("./models/Comment");
+const { Comment } = require("../models/Comment");
 
 const getComments = async (req, res) => {
     const comments = await Comment.findAll({});
