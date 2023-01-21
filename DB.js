@@ -5,4 +5,4 @@ const sequelize = new Sequelize('Social_network', 'root', '', {
     dialect: 'mysql'
 });
 
-module.exports = { Sequelize };
+module.exports = { sequelize };

@@ -140,13 +140,11 @@ app.listen(port, async () => {
     try {
         await User.sync({
             alter: true,
-            force: false
+            force: false,
         });
     } catch (error) {
         console.error(error);
     }
-});
-app.listen(port, async () => {
     try {
         await Post.sync({
             alter: true,
@@ -155,14 +153,12 @@ app.listen(port, async () => {
     } catch (error) {
         console.error(error);
     }
-});
-app.listen(port, async () => {
-    try {
-        await Comment.sync({
-            alter: true,
-            force: false,
-        });
-    } catch (error) {
-        console.error(error);
-    }
+        try {
+            await Comment.sync({
+                alter: true,
+                force: false,
+            });
+        } catch (error) {
+            console.error(error);
+        }
 });
