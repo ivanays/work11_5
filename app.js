@@ -120,6 +120,35 @@ app.path("/comments/:id", async (req, res) => {
     }
 });
 
+app.delete("/users/:id", async (req, res) => {
+    try {
+        const user = await User.findByPk(req.params.id);
+        await user.destroy();
+        return user.res.status(204).json(user);
+    } catch (e) {
+        return res.json(e);
+    }
+});
+app.delete("/posts/:id", async (req, res) => {
+    try {
+        const post = await Post.findByPk(req.params.id);
+        await post.destroy();
+        return post.res.status(204).json(post);
+    } catch (e) {
+        return res.json(e);
+    }
+});
+app.delete("/comments/:id", async (req, res) => {
+    try {
+        const comment = await Comment.findByPk(req.params.id);
+        await comment.destroy();
+        return comment.res.status(204).json(comment);
+    } catch (e) {
+        return res.json(e);
+    }
+});
+
+
 app.listen(port, async () => {
     try {
         await User.sync({
