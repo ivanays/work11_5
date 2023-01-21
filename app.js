@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+
 const { User } = require("./models/User");
 const { Post } = require("./models/Post");
 const { Comment } = require("./models/Comment");
@@ -10,33 +12,18 @@ app.get("/users", async (req, res) => {
     const users = await User.findAll({});
     return res.status(200).json({
         data: users,
-        meta: {
-            page: 1,
-            per_page: 10,
-            totalItems: users.length
-        }
     })
 });
 app.get("/posts", async (req, res) => {
     const posts = await Post.findAll({});
     return res.status(200).json({
         data: posts,
-        meta: {
-            page: 1,
-            per_page: 10,
-            totalItems: posts.length,
-        },
     });
 });
 app.get("/comments", async (req, res) => {
     const comments = await Comment.findAll({});
     return res.status(200).json({
         data: comments,
-        meta: {
-            page: 1,
-            per_page: 10,
-            totalItems: comments.length,
-        },
     });
 });
 
